@@ -40,14 +40,14 @@ def show_images(img_list):
     plt.tight_layout()
 
 
-def construct_focused_image(img_grad_list, img_gray_list, img_color_list):
+def construct_focused_image(img_grad_list, img_gray_list):
 
     imgs_grad_blurred = []
-    for img_grad in imgs_grad:
+    for img_grad in img_grad_list:
         imgs_grad_blurred.append(gaussian_filter(img_grad, sigma=10))
 
     imgs_gray = np.array(img_gray_list)
     sharpest_indices = np.argmax(np.array(imgs_grad_blurred), axis=0)
-    focused_img = np.take_along_axis(imgs_gray, np.expand_dims(sharpest_indices, axis=0), axis=0)
+    focused_img_gray = np.take_along_axis(imgs_gray, np.expand_dims(sharpest_indices, axis=0), axis=0)
 
     return focused_img_gray, sharpest_indices
