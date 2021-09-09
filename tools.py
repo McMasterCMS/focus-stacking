@@ -37,6 +37,9 @@ def show_images(img_list):
         else:
             plt.imshow(img, cmap='gray', vmin=0, vmax=255)
 
+        plt.xticks([])
+        plt.yticks([])
+
     plt.tight_layout()
 
 
