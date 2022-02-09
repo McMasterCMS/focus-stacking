@@ -53,4 +53,20 @@ def construct_focused_image(img_grad_list, img_gray_list):
     sharpest_indices = np.argmax(np.array(imgs_grad_blurred), axis=0)
     focused_img_gray = np.take_along_axis(imgs_gray, np.expand_dims(sharpest_indices, axis=0), axis=0)
 
-    return focused_img_gray, sharpest_indices
+    h, w = img_grad_list[0].shape
+    img_labeled = np.zeros((h, w, 3))
+    
+    for row  in range(h):
+        for col in range(w):
+            i = sharpest_indices[row, col]
+            if i == 0:
+                img_labeled[row, col, 0] = img_gray_list[i][row, col]
+            if i == 1:
+                img_labeled[row, col, 1] = img_gray_list[i][row, col]
+            if i == 2:
+                img_labeled[row, col, 2] = img_gray_list[i][row, col]
+            if i == 3:
+                img_labeled[row, col, 0] = img_gray_list[i][row, col]
+                img_labeled[row, col, 2] = img_gray_list[i][row, col]
+
+    return focused_img_gray[0], img_labeled.astype(np.uint8)
