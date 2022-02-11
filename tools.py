@@ -11,7 +11,7 @@ def load_image(img_path):
     return np.asarray(img_gray), np.asarray(img_color)
 
 
-def load_images(img_folder_path):
+def load_images(img_folder_path="/content"):
     img_paths = glob.glob(img_folder_path + "/*.png")
 
     imgs_color = []
